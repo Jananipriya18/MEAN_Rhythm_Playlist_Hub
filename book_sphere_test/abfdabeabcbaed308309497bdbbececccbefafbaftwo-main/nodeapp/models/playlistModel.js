@@ -23,7 +23,7 @@ const playlistSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     required: true,
-    default: Date.now, // Set the default value to the current date
+    default: Date.now, 
   },
   userId: {
     type: String,
