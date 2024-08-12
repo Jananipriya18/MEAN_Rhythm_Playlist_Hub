@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"bookdb.books"}],"uuid":"b6c4117e698447c8afa054ee5eff47e7"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"bookdb.books"}],"uuid":"aa08025b89ee41f1980345284e36c97e"}
