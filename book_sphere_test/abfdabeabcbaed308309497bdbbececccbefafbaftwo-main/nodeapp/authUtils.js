@@ -1,5 +1,3 @@
-// authUtils.js
-
 const jwt = require('jsonwebtoken');
 
 const generateToken = (userId) => {
@@ -11,15 +9,23 @@ const generateToken = (userId) => {
 const validateToken = (req, res, next) => {
   try {
     console.log("came");
-    const token = req.header('Authorization');
+    const authHeader = req.header('Authorization');
+    
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: "No token provided" });
+    }
 
-    const decoded = jwt.verify(token, 'asdfghjkl');
-    console.log("decoded",decoded);
-    next()
+    const token = authHeader.split(' ')[1]; // Extract the token part
+    
+    const decoded = jwt.verify(token, 'asdfghjkl'); // Use your secret key
+    console.log("decoded", decoded);
+    
+    req.user = decoded; // Attach decoded token info to request object
+    next();
 
   } catch (error) {
-    console.log("error",error);
-    res.status(400).json({ message:"Authentication failed" });
+    console.log("error", error);
+    res.status(401).json({ message: "Authentication failed" }); // Use 401 for auth failures
   }
 };
 
