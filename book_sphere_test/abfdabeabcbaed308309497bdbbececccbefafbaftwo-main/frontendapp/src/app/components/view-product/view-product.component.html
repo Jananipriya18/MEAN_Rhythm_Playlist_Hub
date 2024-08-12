@@ -1,0 +1,110 @@
+<!-- view-product.component.html -->
+
+<h1 class="book">BOOK LIST</h1>
+<div class="search-sort-container">
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (input)="searchProducts()"
+    placeholder="Search your title here..."
+  />
+  <select [(ngModel)]="sortValue" (change)="sortProducts()">
+    <option value="">Sort by Publication Year</option>
+    <option value="1">Ascending</option>
+    <option value="-1">Descending</option>
+  </select>
+</div>
+<div *ngIf="products && products.length > 0; else noProducts">
+  <div *ngFor="let product of products; let i = index">
+    <div class="product-item">
+      <h2>Title: {{ product.title }}</h2>
+      <p><strong>Genre:</strong> {{ product.genre }}</p>
+      <p><strong>Description:</strong> {{ product.description }}</p>
+      <p><strong>Publication Year:</strong> {{ product.publicationYear }}</p>
+      <p><strong>Page Count:</strong> {{ product.pageCount }}</p>
+      <p><strong>Available Copies:</strong> {{ product.availableCopies }}</p>
+      <p *ngIf="userRole === 'Buyer'">
+        <strong>Author Name:</strong> {{ product?.authorInfo?.firstName }}
+        {{ product?.authorInfo?.lastName }}
+      </p>
+      <button
+        *ngIf="userRole === 'Publisher'"
+        (click)="editProduct(i)"
+        class="edit-btn"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="userRole === 'Publisher'"
+        (click)="deleteProduct(i)"
+        class="delete-btn"
+      >
+        Delete
+      </button>
+
+      <!-- Display input fields for editing when editingIndex matches the current index -->
+      <div *ngIf="editingIndex === i">
+        <div class="form-group">
+          <label for="editedTitle">Title:</label>
+          <input
+            type="text"
+            id="editedTitle"
+            [(ngModel)]="editedProduct.title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedGenre">Genre:</label>
+          <select id="editedGenre" [(ngModel)]="editedProduct.genre">
+            <option value="Fiction">Fiction</option>
+            <option value="Non-fiction">Non-fiction</option>
+            <option value="Mystery">Mystery</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="editedDescription">Description:</label>
+          <textarea
+            id="editedDescription"
+            [(ngModel)]="editedProduct.description"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="editedPublicationYear">Publication Year:</label>
+          <input
+            type="number"
+            id="editedPublicationYear"
+            [(ngModel)]="editedProduct.publicationYear"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedPageCount">Page Count:</label>
+          <input
+            type="number"
+            id="editedPageCount"
+            [(ngModel)]="editedProduct.pageCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedAvailableCopies">Available Copies:</label>
+          <input
+            type="number"
+            id="editedAvailableCopies"
+            [(ngModel)]="editedProduct.availableCopies"
+          />
+        </div>
+
+        <!-- Save and Cancel buttons for the edit form -->
+        <button (click)="updateProduct(i)" class="edit-btn">Save</button>
+        <button (click)="cancelEdit(i)" class="delete-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>

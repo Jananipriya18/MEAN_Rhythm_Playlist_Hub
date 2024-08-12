@@ -1,0 +1,39 @@
+<!-- login.component.html -->
+<h1 class="main-heading">BOOK SPHERE</h1>
+<div class="login-container">
+  <div>
+    <img src="assets/booklogo.png" />
+  </div>
+  <div>
+    <h1>Login Form</h1>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+
+      <button type="submit">Login</button>
+
+      <div class="signup-link">
+        <p>Don't have an account? <a routerLink="/register">Signup</a></p>
+      </div>
+    </form>
+  </div>
+</div>

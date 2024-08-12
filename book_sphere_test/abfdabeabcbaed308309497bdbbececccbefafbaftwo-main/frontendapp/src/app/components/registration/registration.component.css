@@ -1,0 +1,60 @@
+h1 {
+  color: #fff;
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+div > div {
+  color: red;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login-link {
+    margin-top: 15px;
+  }
+  
+  .login-link a {
+   color: #f9ff00; /* Blue */
+   text-decoration: none;
+   font-size: 20px;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
