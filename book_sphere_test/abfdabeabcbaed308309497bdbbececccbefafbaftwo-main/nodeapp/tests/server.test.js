@@ -317,53 +317,53 @@ describe('getAllPlaylists', () => {
   });
 });
 
+  test('get_all_playlists_should_return_playlists_and_respond_with_a_200_status_code', async () => {
+    // Sample playlist data
+    const playlistsData = [
+      {
+        _id: 'playlist1',
+        songName: 'Song 1',
+        genre: 'Pop',
+        authorName: 'Author 1',
+        songMovieName: 'Movie 1',
+        createdDate: new Date('2023-01-01'),
+        userId: 'user123',
+      },
+      {
+        _id: 'playlist2',
+        songName: 'Song 2',
+        genre: 'Rock',
+        authorName: 'Author 2',
+        songMovieName: 'Movie 2',
+        createdDate: new Date('2023-01-02'),
+        userId: 'user456',
+      },
+    ];
 
-//   test('get_all_books_should_return_books_and_respond_with_a_200_status_code', async () => {
-//     // Sample book data
-//     const booksData = [
-//       {
-//         _id: 'book1',
-//         title: 'Book 1',
-//         genre: 'Fiction',
-//         description: 'Book 1 description',
-//         publicationYear: 2022,
-//         pageCount: 300,
-//         availableCopies: 5,
-//         userId: 'user123',
-//       },
-//       {
-//         _id: 'book2',
-//         title: 'Book 2',
-//         genre: 'Non-fiction',
-//         description: 'Book 2 description',
-//         publicationYear: 2021,
-//         pageCount: 250,
-//         availableCopies: 10,
-//         userId: 'user456',
-//       },
-//     ];
+    // Mock Express request and response objects
+    const req = {
+      body: { sortValue: 1, searchValue: '' },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
 
-//     // Mock Express request and response objects
-//     const req = {
-//       body: { sortValue: 1, searchValue: '' },
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
+    // Mock the Playlist.find method to resolve with the sample playlist data
+    const playlistQuery = {
+      sort: jest.fn().mockResolvedValue(playlistsData),
+    };
+    Playlist.find = jest.fn().mockReturnValue(playlistQuery);
 
-//     // Mock the Book.find method to resolve with the sample book data
-//     const bookQuery = {
-//       sort: jest.fn().mockResolvedValue(booksData),
-//     };
-//     Book.find = jest.fn().mockReturnValue(bookQuery);
+    // Call the controller function
+    await getAllPlaylists(req, res);
 
-//     // Call the controller function
-//     await getAllBooks(req, res);
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(playlistsData);
+  });
 
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(200);
-//   });
+
 
 //   test('get_all_books_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
 //     // Mock an error to be thrown when calling Book.find
@@ -780,43 +780,44 @@ describe('getAllPlaylists', () => {
 
 // });
 
-// describe('validateToken', () => {
-//   test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
-//     // Mock the req, res, and next objects
-//     const req = {
-//       header: jest.fn().mockReturnValue('invalidToken'),
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-//     const next = jest.fn();
- 
-//     // Call the validateToken function
-//     validateToken(req, res, next);
- 
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(400);
-//     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
-//   });
- 
-//   test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
-//     // Mock the req, res, and next objects
-//     const req = {
-//       header: jest.fn().mockReturnValue(null),
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-//     const next = jest.fn();
- 
-//     // Call the validateToken function
-//     validateToken(req, res, next);
- 
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(400);
-//     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
-//   });
-// });
 
+
+describe('validateToken for Playlist Operations', () => {
+  test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
+    // Mock the req, res, and next objects
+    const req = {
+      header: jest.fn().mockReturnValue('invalidToken'),
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    const next = jest.fn();
+
+    // Call the validateToken function
+    validateToken(req, res, next);
+
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+  });
+
+  test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
+    // Mock the req, res, and next objects
+    const req = {
+      header: jest.fn().mockReturnValue(null),
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    const next = jest.fn();
+
+    // Call the validateToken function
+    validateToken(req, res, next);
+
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+  });
+});
