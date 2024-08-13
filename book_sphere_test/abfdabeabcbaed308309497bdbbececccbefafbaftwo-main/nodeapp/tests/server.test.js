@@ -3,8 +3,8 @@ const { getUserByUsernameAndPassword, getAllUsers, addUser } = require("../contr
 // const Vehicle = require("../models/vehicleModel");
 const User = require("../models/userModel");
 const { validateToken } = require('../authUtils');
-// const Book = require("../models/bookModel");
-// const { getAllBooks, getBooksByUserId, updateBook, deleteBook, getBookById, addBook } = require("../controllers/bookController");
+const Playlist = require("../models/playlistModel");
+const { getAllPlaylists, getPlaylistById, addPlaylist, updatePlaylist, deletePlaylist, getPlaylistsByUserId } = require("../controllers/playlistController");
 
 
 describe('getUserByUsernameAndPassword', () => {
@@ -290,6 +290,32 @@ describe('getAllPlaylists', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(playlistsData);
   });
+
+  test('get_all_playlists_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
+    // Mock Express request and response objects
+    const req = {
+      body: { sortValue: 1, searchValue: '' },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    // Mock the Playlist.find method to reject with an error
+    const error = new Error('Database error');
+    const playlistQuery = {
+      sort: jest.fn().mockRejectedValue(error),
+    };
+    Playlist.find = jest.fn().mockReturnValue(playlistQuery);
+
+    // Call the controller function
+    await getAllPlaylists(req, res);
+
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
+  });
+});
 
 
 //   test('get_all_books_should_return_books_and_respond_with_a_200_status_code', async () => {
