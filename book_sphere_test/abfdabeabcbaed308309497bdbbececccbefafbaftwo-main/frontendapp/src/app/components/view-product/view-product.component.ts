@@ -1,7 +1,7 @@
 // view-product.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { PublisherService } from 'src/app/services/publisher.service';
+import { PublisherService } from 'src/app/services/playlist.service';
 
 @Component({
   selector: 'app-view-product',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PublisherService } from 'src/app/services/publisher.service';
+import { PublisherService } from 'src/app/services/playlist.service';
 
 @Component({
   selector: 'app-add-product',
