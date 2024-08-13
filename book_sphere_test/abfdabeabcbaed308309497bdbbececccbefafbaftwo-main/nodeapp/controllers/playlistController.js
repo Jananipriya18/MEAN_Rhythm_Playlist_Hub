@@ -1,6 +1,6 @@
 const Playlist = require('../models/playlistModel');
 
-const cc = async (req, res) => {
+const getAllPlaylists = async (req, res) => {
   try {
     const sortValue = req.body.sortValue || 1; // Default to ascending order if not provided
     const search = req.body.searchValue || ''; // Default to empty string if not provided
