@@ -44,7 +44,7 @@ export class ViewPlaylistComponent implements OnInit {
           playlistData = playlistsData;
 
           // Fetch author information
-          this.playlistService.getAuthors().subscribe(
+          this.playlistService.getAllPlaylists().subscribe(
             (authorsData) => {
               this.allUsers = authorsData;
               console.log('Authors fetched successfully', authorsData);
