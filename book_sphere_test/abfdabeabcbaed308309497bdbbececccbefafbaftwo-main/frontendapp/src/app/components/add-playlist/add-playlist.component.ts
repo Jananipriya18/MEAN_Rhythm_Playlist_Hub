@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PublisherService } from 'src/app/services/playlist.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
 
 @Component({
   selector: 'app-add-playlist',
@@ -11,7 +11,7 @@ export class AddPlaylistComponent {
 
   playlistForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private publisherService: PublisherService) {
+  constructor(private fb: FormBuilder, private playlistService: PlaylistService) {
     this.playlistForm = this.fb.group({
       songName: ['', Validators.required],
       genre: ['', Validators.required],
@@ -27,7 +27,7 @@ export class AddPlaylistComponent {
       console.log(this.playlistForm.value);
       
       this.playlistForm.value.userId = localStorage.getItem('userId');
-      this.publisherService.addPlaylist(this.playlistForm.value).subscribe(
+      this.playlistService.addPlaylist(this.playlistForm.value).subscribe(
         (response) => {
           // Handle success if needed
           console.log('Playlist added successfully', response);

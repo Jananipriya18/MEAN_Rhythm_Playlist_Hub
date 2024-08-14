@@ -1,0 +1,100 @@
+<h1 class="playlist">PLAYLIST LIST</h1>
+<div class="search-sort-container">
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (input)="searchPlaylists()"
+    placeholder="Search your playlist here..."
+  />
+  <select [(ngModel)]="sortValue" (change)="sortPlaylists()">
+    <option value="">Sort by Creation Date</option>
+    <option value="1">Ascending</option>
+    <option value="-1">Descending</option>
+  </select>
+</div>
+<div *ngIf="playlists && playlists.length > 0; else noPlaylists">
+  <div *ngFor="let playlist of playlists; let i = index">
+    <div class="playlist-item">
+      <h2>Song Name: {{ playlist.songName }}</h2>
+      <p><strong>Genre:</strong> {{ playlist.genre }}</p>
+      <p><strong>Author Name:</strong> {{ playlist.authorName }}</p>
+      <p><strong>Song/Movie Name:</strong> {{ playlist.songMovieName }}</p>
+      <p><strong>Creation Date:</strong> {{ playlist.createdDate | date }}</p>
+      <p *ngIf="userRole === 'Listener'">
+        <strong>Author Name:</strong> {{ playlist?.authorInfo?.firstName }}
+        {{ playlist?.authorInfo?.lastName }}
+      </p>
+      <button
+        *ngIf="userRole === 'PlaylistAdministrator'"
+        (click)="editPlaylist(i)"
+        class="edit-btn"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="userRole === 'PlaylistAdministrator'"
+        (click)="deletePlaylist(i)"
+        class="delete-btn"
+      >
+        Delete
+      </button>
+
+      <!-- Display input fields for editing when editingIndex matches the current index -->
+      <div *ngIf="editingIndex === i">
+        <div class="form-group">
+          <label for="editedSongName">Song Name:</label>
+          <input
+            type="text"
+            id="editedSongName"
+            [(ngModel)]="editedPlaylist.songName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedGenre">Genre:</label>
+          <select id="editedGenre" [(ngModel)]="editedPlaylist.genre">
+            <option value="Pop">Pop</option>
+            <option value="Rock">Rock</option>
+            <option value="Jazz">Jazz</option>
+            <!-- Add other genres as needed -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="editedAuthorName">Author Name:</label>
+          <input
+            type="text"
+            id="editedAuthorName"
+            [(ngModel)]="editedPlaylist.authorName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedSongMovieName">Song/Movie Name:</label>
+          <input
+            type="text"
+            id="editedSongMovieName"
+            [(ngModel)]="editedPlaylist.songMovieName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="editedCreatedDate">Creation Date:</label>
+          <input
+            type="date"
+            id="editedCreatedDate"
+            [(ngModel)]="editedPlaylist.createdDate"
+          />
+        </div>
+
+        <!-- Save and Cancel buttons for the edit form -->
+        <button (click)="updatePlaylist(i)" class="edit-btn">Save</button>
+        <button (click)="cancelEdit()" class="delete-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPlaylists>
+  <p>No playlists available.</p>
+</ng-template>
