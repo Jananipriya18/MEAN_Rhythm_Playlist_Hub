@@ -784,20 +784,17 @@ describe('Playlist_Schema_Validation', () => {
   });
 });
 
-
-
-
 describe('validateToken for Playlist Operations', () => {
   test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
-      header: jest.fn().mockReturnValue('invalidToken'),
+      header: jest.fn().mockReturnValue('invalidToken'), // Simulate an invalid token
     };
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
-    const next = jest.fn();
+    const next = jest.fn(); // Function to be called if token is valid
 
     // Call the validateToken function
     validateToken(req, res, next);
@@ -807,22 +804,22 @@ describe('validateToken for Playlist Operations', () => {
     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
   });
 
-//   test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
-//     // Mock the req, res, and next objects
-//     const req = {
-//       header: jest.fn().mockReturnValue(null),
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-//     const next = jest.fn();
+  test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
+    // Mock the req, res, and next objects
+    const req = {
+      header: jest.fn().mockReturnValue(null), // Simulate no token
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    const next = jest.fn(); // Function to be called if token is valid
 
-//     // Call the validateToken function
-//     validateToken(req, res, next);
+    // Call the validateToken function
+    validateToken(req, res, next);
 
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(400);
-//     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
-//   });
-// });
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+  });
+});
