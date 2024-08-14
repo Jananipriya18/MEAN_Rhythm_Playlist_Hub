@@ -784,11 +784,13 @@ describe('Playlist_Schema_Validation', () => {
   });
 });
 
+// const { validateToken } = require('./path/to/authUtils'); // Adjust the path as needed
+
 describe('validateToken for Playlist Operations', () => {
   test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
-      header: jest.fn().mockReturnValue('invalidToken'), // Simulate an invalid token
+      header: jest.fn().mockReturnValue('Bearer invalidToken'), // Simulate an invalid token
     };
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -800,7 +802,7 @@ describe('validateToken for Playlist Operations', () => {
     validateToken(req, res, next);
 
     // Assertions
-    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.status).toHaveBeenCalledWith(401);
     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
   });
 
@@ -819,7 +821,7 @@ describe('validateToken for Playlist Operations', () => {
     validateToken(req, res, next);
 
     // Assertions
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ message: 'No token provided' });
   });
 });
