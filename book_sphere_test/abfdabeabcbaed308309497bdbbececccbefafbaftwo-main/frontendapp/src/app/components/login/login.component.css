@@ -1,6 +1,6 @@
 form {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
   }
   
@@ -71,4 +71,5 @@ form {
     margin-top : 20px;
     height: 100%;
     width: 50%;
+    margin-left: 0%;
   }
