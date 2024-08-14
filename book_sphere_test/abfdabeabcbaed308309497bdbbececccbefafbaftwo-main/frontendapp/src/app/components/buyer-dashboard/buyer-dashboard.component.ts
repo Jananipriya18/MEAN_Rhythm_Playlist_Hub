@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './buyer-dashboard.component.html',
   styleUrls: ['./buyer-dashboard.component.css']
 })
-export class BuyerDashboardComponent {
+export class ListenerDashboardComponent {
 
   logout(): void {
     // Perform logout logic here

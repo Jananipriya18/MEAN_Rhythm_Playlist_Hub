@@ -1,4 +1,50 @@
-<!-- add-product.component.html -->
+<!-- add-playlist.component.html -->
+<h1>Create New Playlist</h1>
+
+<form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  
+  <div class="form-group">
+    <label for="songName">Song Name</label>
+    <input type="text" id="songName" formControlName="songName">
+    <div *ngIf="playlistForm.get('songName').hasError('required') && playlistForm.get('songName').touched">
+      *Song Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <select id="genre" formControlName="genre">
+      <option value="" disabled selected>Select a Genre</option>
+      <option value="Pop">Pop</option>
+      <option value="Rock">Rock</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Classical">Classical</option>
+    </select>
+    <div *ngIf="playlistForm.get('genre').hasError('required') && playlistForm.get('genre').touched">
+      *Genre is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="authorName">Author Name</label>
+    <input type="text" id="authorName" formControlName="authorName">
+    <div *ngIf="playlistForm.get('authorName').hasError('required') && playlistForm.get('authorName').touched">
+      *Author Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="songMovieName">Song Movie Name</label>
+    <input type="text" id="songMovieName" formControlName="songMovieName">
+    <div *ngIf="playlistForm.get('songMovieName').hasError('required') && playlistForm.get('songMovieName').touched">
+      *Song Movie Name is required.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!playlistForm.valid">Add Playlist</button>
+</form>
+
+<!-- add-product.component.html
 <h1>Create New Book</h1>
 
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
@@ -68,4 +114,4 @@
   </form>
   
   
-  
+   -->
