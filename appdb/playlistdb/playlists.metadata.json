@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"playlistdb.playlists"}],"uuid":"09078696a40448748afc6a84e619d30e"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"playlistdb.playlists"}],"uuid":"e3e88a3881464a29b89c091b3eb39e58"}
