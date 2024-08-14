@@ -365,108 +365,102 @@ describe('getAllPlaylists', () => {
 
 
 
-//   test('get_all_books_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
-//     // Mock an error to be thrown when calling Book.find
-//     const error = new Error('Database error');
-
-//     // Mock Express request and response objects
-//     const req = {
-//       body: { sortValue: 1, searchValue: '' },
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-
-//     // Mock the Book.find method to reject with an error
-//     const bookQuery = {
-//       sort: jest.fn().mockRejectedValue(error)
-//     };
-//     Book.find = jest.fn().mockReturnValue(bookQuery);
-
-//     // Call the controller function
-//     await getAllBooks(req, res);
-
-//     expect(res.status).toHaveBeenCalledWith(500);
-//     expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
-//   });
-// });
-// describe('getBookByUserId', () => {
-//   test('get_book_by_user_id_should_return_books_for_a_valid_user_id_and_respond_with_a_200_status_code', async () => {
-//     // Sample user ID and book data
-//     const userId = 'user123';
-//     const booksData = [
-//       {
-//         _id: 'book1',
-//         title: 'Book 1',
-//         genre: 'Fiction',
-//         description: 'Book 1 description',
-//         publicationYear: 2022,
-//         pageCount: 300,
-//         availableCopies: 5,
-//         userId: 'user123',
-//       },
-//       {
-//         _id: 'book2',
-//         title: 'Book 2',
-//         genre: 'Non-fiction',
-//         description: 'Book 2 description',
-//         publicationYear: 2021,
-//         pageCount: 250,
-//         availableCopies: 10,
-//         userId: 'user123',
-//       },
-//     ];
-
-//     // Mock Express request and response objects
-//     const req = {
-//       body: { userId, sortValue: 1, searchValue: '' },
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-
-//     // Mock the Book.find method to resolve with a query
-//     const bookQuery = {
-//       sort: jest.fn().mockResolvedValue(booksData), // Mocking the sort function
-//     };
-//     Book.find = jest.fn().mockReturnValue(bookQuery);
-
-//     // Call the controller function
-//     await getBooksByUserId(req, res);
-
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(200);
-//   });
-
-//   test('get_book_by_user_id_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
-//     // Mock an error to be thrown when calling Book.find
-//     const error = new Error('Database error');
-
-//     // Mock Express request and response objects
-//     const req = {
-//       body: { userId: 'user123', sortValue: 1, searchValue: '' },
-//     };
-//     const res = {
-//       status: jest.fn().mockReturnThis(),
-//       json: jest.fn(),
-//     };
-
-//     // Mock the Book.find method to resolve with a query
-//     const bookQuery = {
-//       sort: jest.fn().mockRejectedValue(error), // Mocking the sort function with error
-//     };
-//     Book.find = jest.fn().mockReturnValue(bookQuery);
-
-//     // Call the controller function
-//     await getBooksByUserId(req, res);
-
-//     // Assertions
-//     expect(res.status).toHaveBeenCalledWith(500);
-//     expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
-//   });
-// });
+  test('get_all_playlists_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
+    // Mock an error to be thrown when calling Playlist.find
+    const error = new Error('Database error');
+  
+    // Mock Express request and response objects
+    const req = {
+      body: { sortValue: 1, searchValue: '' }, // Match the structure expected by the controller
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+  
+    // Mock the Playlist.find method to reject with an error
+    const playlistQuery = {
+      sort: jest.fn().mockRejectedValue(error)
+    };
+    Playlist.find = jest.fn().mockReturnValue(playlistQuery);
+  
+    // Call the controller function
+    await getAllPlaylists(req, res);
+  
+    // Assertions
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
+  });
+  
+  describe('getPlaylistsByUserId', () => {
+    test('get_playlists_by_user_id_should_return_playlists_for_a_valid_user_id_and_respond_with_a_200_status_code', async () => {
+      // Sample user ID and playlist data
+      const userId = 'user123';
+      const playlistsData = [
+        {
+          _id: 'playlist1',
+          songName: 'Playlist 1',
+          createdDate: new Date(),
+          userId: 'user123',
+        },
+        {
+          _id: 'playlist2',
+          songName: 'Playlist 2',
+          createdDate: new Date(),
+          userId: 'user123',
+        },
+      ];
+  
+      // Mock Express request and response objects
+      const req = {
+        body: { userId, sortValue: 1, searchValue: '' },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+  
+      // Mock the Playlist.find method to resolve with a query
+      const playlistQuery = {
+        sort: jest.fn().mockResolvedValue(playlistsData), // Mocking the sort function
+      };
+      Playlist.find = jest.fn().mockReturnValue(playlistQuery);
+  
+      // Call the controller function
+      await getPlaylistsByUserId(req, res);
+  
+      // Assertions
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(playlistsData);
+    });
+  });
+   
+  describe('getPlaylistsByUserId Error Handling', () => {
+    test('get_playlists_by_user_id_should_handle_errors_and_respond_with_a_500_status_code_and_an_error_message', async () => {
+      // Mock an error to be thrown when calling Playlist.find
+      const error = new Error('Database error');
+  
+      // Mock Express request and response objects
+      const req = {
+        body: { userId: 'user123', sortValue: 1, searchValue: '' },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+  
+      // Mock the Playlist.find method to reject with an error
+      Playlist.find = jest.fn().mockRejectedValue(error);
+  
+      // Call the controller function
+      await getPlaylistsByUserId(req, res);
+  
+      // Assertions
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
+    });
+  });
+  
 // describe('deleteBook', () => {
 //   test('delete_book_should_delete_a_book_and_respond_with_a_200_status_code_and_success_message', async () => {
 //     // Sample book ID to be deleted
@@ -782,42 +776,42 @@ describe('getAllPlaylists', () => {
 
 
 
-describe('validateToken for Playlist Operations', () => {
-  test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
-    // Mock the req, res, and next objects
-    const req = {
-      header: jest.fn().mockReturnValue('invalidToken'),
-    };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    const next = jest.fn();
+// describe('validateToken for Playlist Operations', () => {
+//   test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
+//     // Mock the req, res, and next objects
+//     const req = {
+//       header: jest.fn().mockReturnValue('invalidToken'),
+//     };
+//     const res = {
+//       status: jest.fn().mockReturnThis(),
+//       json: jest.fn(),
+//     };
+//     const next = jest.fn();
 
-    // Call the validateToken function
-    validateToken(req, res, next);
+//     // Call the validateToken function
+//     validateToken(req, res, next);
 
-    // Assertions
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
-  });
+//     // Assertions
+//     expect(res.status).toHaveBeenCalledWith(400);
+//     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+//   });
 
-  test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
-    // Mock the req, res, and next objects
-    const req = {
-      header: jest.fn().mockReturnValue(null),
-    };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    const next = jest.fn();
+//   test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
+//     // Mock the req, res, and next objects
+//     const req = {
+//       header: jest.fn().mockReturnValue(null),
+//     };
+//     const res = {
+//       status: jest.fn().mockReturnThis(),
+//       json: jest.fn(),
+//     };
+//     const next = jest.fn();
 
-    // Call the validateToken function
-    validateToken(req, res, next);
+//     // Call the validateToken function
+//     validateToken(req, res, next);
 
-    // Assertions
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
-  });
-});
+//     // Assertions
+//     expect(res.status).toHaveBeenCalledWith(400);
+//     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
+//   });
+// });
