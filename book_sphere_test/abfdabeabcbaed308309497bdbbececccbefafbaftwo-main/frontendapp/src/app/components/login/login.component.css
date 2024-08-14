@@ -63,6 +63,7 @@ form {
     justify-content: center;
     align-items: center;
     height: 80vh;
+    margin-left: -10%;
   }
 
   img{
@@ -71,5 +72,5 @@ form {
     margin-top : 20px;
     height: 100%;
     width: 50%;
-    margin-left: 0%;
+    /* margin-left: 0%; */
   }
