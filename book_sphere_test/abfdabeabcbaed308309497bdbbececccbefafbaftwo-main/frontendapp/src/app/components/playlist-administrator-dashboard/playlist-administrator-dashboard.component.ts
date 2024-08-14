@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-publisher-dashboard',
-  templateUrl: './publisher-dashboard.component.html',
-  styleUrls: ['./publisher-dashboard.component.css']
+  selector: 'app-playlist-administrator-dashboard',
+  templateUrl: './playlist-administrator-dashboard.component.html',
+  styleUrls: ['./playlist-administrator-dashboard.component.css']
 })
-export class PublisherDashboardComponent {
+export class PlaylistAdministratorDashboardComponent {
 
   logout(): void {
     // Perform logout logic here

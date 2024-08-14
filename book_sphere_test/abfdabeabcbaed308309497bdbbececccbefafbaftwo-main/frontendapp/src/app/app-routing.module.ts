@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AddProductComponent } from './components/add-playlist/add-playlist.component';
-import { PublisherDashboardComponent } from './components/publisher-dashboard/publisher-dashboard.component';
+import { PublisherDashboardComponent } from './components/playlist-administrator-dashboard/playlist-administrator-dashboard.component';
 import { ViewProductComponent } from './components/view-product/view-product.component';
-import { BuyerDashboardComponent } from './components/buyer-dashboard/buyer-dashboard.component';
+import { BuyerDashboardComponent } from './components/curator-dashboard/curator-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
