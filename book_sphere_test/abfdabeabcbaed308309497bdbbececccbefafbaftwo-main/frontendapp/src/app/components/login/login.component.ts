@@ -24,10 +24,10 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('userId', response.userInformation._id);
           localStorage.setItem('userRole', response.userInformation.role);
-          if(response.userInformation.role=='Buyer'){
-            this.router.navigate(['/buyer-dashboard']);
+          if(response.userInformation.role=='Curator'){
+            this.router.navigate(['/curator-dashboard']);
           }else{
-            this.router.navigate(['/publisher-dashboard']);
+            this.router.navigate(['/playlist-administrator-dashboard']);
           }
         },
         (error) => {

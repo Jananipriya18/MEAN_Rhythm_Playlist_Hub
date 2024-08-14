@@ -1,1 +1,1 @@
-export const apiUrl = 'dummyurl';
+export const apiUrl = 'https://8080-aabdbffdadabafcfd315698265bfdfddabbddadfone.premiumproject.examly.io';
