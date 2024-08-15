@@ -25,14 +25,14 @@
         {{ playlist?.authorInfo?.lastName }}
       </p>
       <button
-        *ngIf="userRole === 'PlaylistAdministrator'"
+        *ngIf="userRole === 'PlaylistAdministrator"
         (click)="editPlaylist(i)"
         class="edit-btn"
       >
         Edit
       </button>
       <button
-        *ngIf="userRole === 'PlaylistAdministrator'"
+        *ngIf="userRole === 'PlaylistAdministrator"
         (click)="deletePlaylist(i)"
         class="delete-btn"
       >

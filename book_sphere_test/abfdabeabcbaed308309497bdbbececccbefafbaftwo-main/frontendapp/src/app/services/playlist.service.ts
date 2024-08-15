@@ -72,19 +72,34 @@ export class PlaylistService {
     return this.http.delete(`${this.apiUrl}/playlist/deletePlaylist/${id}`, { headers });
   }
 
-  getAllPlaylists(): Observable<any> {
+  // getAllPlaylists(): Observable<any> {
+  //   const authToken = localStorage.getItem('token');
+  //   console.log(authToken);
+
+  //   // Set up headers with authorization
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${authToken}`,
+  //   });
+
+  //   // Make the HTTP GET request with headers
+  //   return this.http.post<any>(`${this.apiUrl}/playlist/getAllPlaylists`, { headers });
+  // }
+
+  getAllPlaylists(sortValue: number = 1, searchValue: string = ''): Observable<any> {
     const authToken = localStorage.getItem('token');
     console.log(authToken);
-
-    // Set up headers with authorization
+  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     });
-
-    // Make the HTTP GET request with headers
-    return this.http.post<any>(`${this.apiUrl}/playlist/getAllPlaylists`, { headers });
+  
+    const body = { sortValue, searchValue };
+  
+    return this.http.post<any>(`${this.apiUrl}/playlist/getAllPlaylists`, body, { headers });
   }
+  
 
   searchPlaylists(query: string): Observable<any> {
     const authToken = localStorage.getItem('token');
