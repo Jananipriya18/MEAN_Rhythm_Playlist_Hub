@@ -787,7 +787,7 @@ describe('Playlist_Schema_Validation', () => {
 // const { validateToken } = require('./path/to/authUtils'); // Adjust the path as needed
 
 describe('validateToken for Playlist Operations', () => {
-  test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
+  test('should_respond_with_401_status_and_error_message_if_invalid_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
       header: jest.fn().mockReturnValue('Bearer invalidToken'), // Simulate an invalid token
@@ -806,7 +806,7 @@ describe('validateToken for Playlist Operations', () => {
     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
   });
 
-  test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
+  test('should_respond_with_401_status_and_error_message_if_no_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
       header: jest.fn().mockReturnValue(null), // Simulate no token

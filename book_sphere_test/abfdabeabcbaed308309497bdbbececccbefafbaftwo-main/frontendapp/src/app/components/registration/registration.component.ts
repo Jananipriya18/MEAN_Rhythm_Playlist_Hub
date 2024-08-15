@@ -12,7 +12,7 @@ export class RegistrationComponent {
 
   registrationForm: FormGroup;
 
-  roles = ['PlaylistAdministator', 'Curator'];
+  roles = ['PlaylistAdministrator', 'Curator'];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registrationForm = this.fb.group({

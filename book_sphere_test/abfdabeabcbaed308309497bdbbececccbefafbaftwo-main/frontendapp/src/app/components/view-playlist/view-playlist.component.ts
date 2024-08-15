@@ -20,6 +20,7 @@ export class ViewPlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.userRole = localStorage.getItem('userRole');
+    console.log('User Role:', this.userRole); // Debugging line
 
     if (this.userRole === 'PlaylistAdministrator') {
       this.fetchPlaylistsForAdmin();
