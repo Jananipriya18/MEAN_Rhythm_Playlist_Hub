@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PlaylistService } from 'src/app/services/playlist.service';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-add-playlist',
@@ -11,7 +12,8 @@ export class AddPlaylistComponent {
 
   playlistForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private playlistService: PlaylistService) {
+  // Inject the Router service in the constructor
+  constructor(private fb: FormBuilder, private playlistService: PlaylistService, private router: Router) {
     this.playlistForm = this.fb.group({
       songName: ['', Validators.required],
       genre: ['', Validators.required],
