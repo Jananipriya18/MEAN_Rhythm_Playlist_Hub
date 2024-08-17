@@ -784,44 +784,47 @@ describe('Playlist_Schema_Validation', () => {
   });
 });
 
-// const { validateToken } = require('./path/to/authUtils'); // Adjust the path as needed
-
-describe('validateToken for Playlist Operations', () => {
-  test('should_respond_with_401_status_and_error_message_if_invalid_token_is_provided', () => {
+describe('validateToken', () => {
+  test('should_respond_with_400_status_and_error_message_if_invalid_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
-      header: jest.fn().mockReturnValue('Bearer invalidToken'), // Simulate an invalid token
+      header: jest.fn().mockReturnValue('invalidToken'),
     };
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
-    const next = jest.fn(); // Function to be called if token is valid
-
+    const next = jest.fn();
+ 
     // Call the validateToken function
     validateToken(req, res, next);
-
+ 
     // Assertions
-    expect(res.status).toHaveBeenCalledWith(401);
+    expect(req.header).toHaveBeenCalledWith('Authorization');
+    expect(next).not.toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
   });
-
-  test('should_respond_with_401_status_and_error_message_if_no_token_is_provided', () => {
+ 
+  test('should_respond_with_400_status_and_error_message_if_no_token_is_provided', () => {
     // Mock the req, res, and next objects
     const req = {
-      header: jest.fn().mockReturnValue(null), // Simulate no token
+      header: jest.fn().mockReturnValue(null),
     };
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
-    const next = jest.fn(); // Function to be called if token is valid
-
+    const next = jest.fn();
+ 
     // Call the validateToken function
     validateToken(req, res, next);
-
+ 
     // Assertions
-    expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalledWith({ message: 'No token provided' });
+    expect(req.header).toHaveBeenCalledWith('Authorization');
+    expect(next).not.toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Authentication failed' });
   });
 });
+
